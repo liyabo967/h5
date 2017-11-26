@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "414ffb0a-2d90-4007-8d9c-adfc5ee90854",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "halfMoonSword": {
+      "ver": "1.0.3",
+      "uuid": "7f09c1bc-eb37-4ca9-8754-7c64ff129e9e",
+      "rawTextureUuid": "414ffb0a-2d90-4007-8d9c-adfc5ee90854",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -1,
+      "trimX": 0,
+      "trimY": 3,
+      "width": 106,
+      "height": 106,
+      "rawWidth": 106,
+      "rawHeight": 110,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

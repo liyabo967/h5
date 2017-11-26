@@ -19,8 +19,8 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         //cc.log("------------onLoad");
-        this.groundY = 615; //790,980,1155
-        this.spawnNewEnemy();
+        //this.groundY = 615; //790,980,1155
+        //this.spawnNewEnemy();
         //this.button.node.on('click', this.onClick, this);
     },
 
@@ -53,9 +53,11 @@ cc.Class({
     },
 
     onClick: function(){
-        var dragonDisplay = this.player;
-        dragonDisplay.armatureName = 'armatureName';  
-        dragonDisplay.playAnimation('walk');  
+        cc.log("-----------------------onClick");
+        this.player.setPosition(200,200);
+        // var dragonDisplay = this.player;
+        // dragonDisplay.armatureName = 'armatureName';  
+        // dragonDisplay.playAnimation('walk');  
     },
 
     // called every frame, uncomment this function to activate update callback

@@ -354,7 +354,20 @@
       "__id__": 7
     },
     "_enabled": true,
-    "hp": 100
+    "maxHp": 100,
+    "hp": 100,
+    "hpComponent": null,
+    "attack": 10,
+    "attackRange": 150,
+    "xSpeed": 200,
+    "moveEnable": false,
+    "moveAtX": true,
+    "isPlaying": false,
+    "animationName": "idle",
+    "target": null,
+    "attackCalculate": 30,
+    "hurtBuff": 0,
+    "i": 0
   },
   {
     "__type__": "cc.PrefabInfo",

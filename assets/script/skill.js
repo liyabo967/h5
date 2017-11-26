@@ -3,10 +3,9 @@ cc.Class({
     properties: {},
 
     onLoad: function () {
-        cc.log("skill------------onLoad");
         var clickEventHandler = new cc.Component.EventHandler();
         clickEventHandler.target = this.node; //这个 node 节点是你的事件处理代码组件所属的节点
-        clickEventHandler.component = "MyComponent";//这个是代码文件名
+        clickEventHandler.component = "Skill";//这个是代码文件名
         clickEventHandler.handler = "callback";
         clickEventHandler.customEventData = "foobar";
 
