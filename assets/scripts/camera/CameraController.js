@@ -22,8 +22,6 @@ cc.Class({
     //called every frame, uncomment this function to activate update callback
     update: function (dt) {
         let targetPos = this.target[0].convertToWorldSpaceAR(cc.Vec2.ZERO);
-        cc.log(targetPos.x + " " + targetPos.y);
         this.node.y = this.node.parent.convertToNodeSpaceAR(targetPos).y;
-        cc.log("camera node: " + this.node.x + " " + this.node.y);
     },
 });
