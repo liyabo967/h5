@@ -115,7 +115,6 @@ cc.Class({
                 }
             }
             this.playAnim('attack');
-
         }
     },
 });
