@@ -78,16 +78,22 @@
       },
       {
         "__id__": 22
+      },
+      {
+        "__id__": 29
+      },
+      {
+        "__id__": 32
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 29
+        "__id__": 34
       },
       {
-        "__id__": 30
+        "__id__": 35
       }
     ],
     "_prefab": null,
@@ -169,8 +175,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 4,
-      "y": -1021
+      "x": -2,
+      "y": -912
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -402,12 +408,12 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 0.5,
+    "_scaleX": -0.5,
     "_scaleY": 0.5,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -134,
-      "y": -168
+      "x": 322,
+      "y": -384
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -453,13 +459,12 @@
     "attackRange": 50,
     "xSpeed": 50,
     "moveEnable": false,
-    "moveAtX": true,
     "isPlaying": false,
     "animationName": "idle",
     "target": null,
     "attackCalculate": 20,
     "hurtBuff": 0,
-    "i": 0
+    "floor": 0
   },
   {
     "__type__": "cc.Node",
@@ -564,7 +569,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 16
@@ -655,6 +660,7 @@
     "target": null,
     "attackCalculate": 30,
     "hurtBuff": 0,
+    "floor": 0,
     "i": 0
   },
   {
@@ -663,9 +669,9 @@
       "__id__": 15
     },
     "asset": {
-      "__uuid__": "d9bd7578-eef1-4210-a374-bbd897287ad5"
+      "__uuid__": "c6d194e0-70d8-4814-84a6-dbcae6088629"
     },
-    "fileId": "47p9l5uedDwI22PZhIkQPY",
+    "fileId": "bcKxwWE/tAiIB7K9Mm8wtv",
     "sync": false
   },
   {
@@ -908,6 +914,168 @@
     }
   },
   {
+    "__type__": "cc.Node",
+    "_name": "camera",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 30
+      },
+      {
+        "__id__": 31
+      }
+    ],
+    "_prefab": null,
+    "_id": "d2C9RQqRhI6JKX+zvrkHdZ",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Camera",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 29
+    },
+    "_enabled": true,
+    "_targets": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 9
+      },
+      null
+    ],
+    "zoomRatio": 1
+  },
+  {
+    "__type__": "c755coZCIJNeo/DzazqS5ma",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 29
+    },
+    "_enabled": true,
+    "target": [
+      {
+        "__id__": 9
+      }
+    ]
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "skeleton_ske_ske",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 33
+      }
+    ],
+    "_prefab": null,
+    "_id": "a7cHIBHZRHgbsqyH9g40MJ",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": -51,
+      "y": -57
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "dragonBones.ArmatureDisplay",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 32
+    },
+    "_enabled": true,
+    "_armatureName": "armatureName",
+    "_animationName": "attack",
+    "playTimes": -1,
+    "_N$dragonAsset": {
+      "__uuid__": "86739334-c70d-4005-814e-21dee472da34"
+    },
+    "_N$dragonAtlasAsset": {
+      "__uuid__": "869d048a-5a8a-4109-a7c8-da74350339d6"
+    },
+    "_N$_defaultArmatureIndex": 0,
+    "_N$_animationIndex": 1,
+    "_N$timeScale": 1,
+    "_N$debugBones": false
+  },
+  {
     "__type__": "cc.Canvas",
     "_name": "",
     "_objFlags": 0,
@@ -932,7 +1100,7 @@
     },
     "_enabled": true,
     "enemyPrefab": {
-      "__uuid__": "d9bd7578-eef1-4210-a374-bbd897287ad5"
+      "__uuid__": "c6d194e0-70d8-4814-84a6-dbcae6088629"
     },
     "player": {
       "__id__": 9
@@ -948,6 +1116,10 @@
     },
     "skillFrame": {
       "__id__": 22
-    }
+    },
+    "camera": {
+      "__id__": 29
+    },
+    "enemyPool": null
   }
 ]
