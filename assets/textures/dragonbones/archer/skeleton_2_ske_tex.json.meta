@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "0ddbdcb7-e691-46bf-8dab-cdfe339ff72f",
+  "atlasJson": "{\"SubTexture\":[{\"width\":211,\"y\":186,\"height\":72,\"name\":\"weapon\",\"x\":1},{\"width\":46,\"y\":260,\"height\":61,\"name\":\"Rfoot\",\"x\":201},{\"width\":44,\"y\":323,\"height\":63,\"name\":\"Lfoot\",\"x\":205},{\"width\":67,\"y\":342,\"height\":77,\"name\":\"Rarm\",\"x\":136},{\"width\":131,\"y\":260,\"height\":113,\"name\":\"body\",\"x\":1},{\"width\":65,\"y\":260,\"height\":80,\"name\":\"Larm\",\"x\":134},{\"width\":230,\"y\":1,\"height\":183,\"name\":\"head\",\"x\":1},{\"width\":118,\"y\":421,\"height\":40,\"name\":\"shouji\",\"x\":136},{\"width\":133,\"y\":375,\"height\":55,\"name\":\"zhengchangyanj\",\"x\":1},{\"width\":120,\"y\":432,\"height\":37,\"name\":\"siwangyanshen\",\"x\":1},{\"width\":118,\"y\":471,\"height\":29,\"name\":\"shengli\",\"x\":1},{\"width\":127,\"y\":463,\"height\":33,\"name\":\"zhayan\",\"x\":123}],\"width\":256,\"height\":512,\"name\":\"skeleton_2_ske\",\"imagePath\":\"skeleton_2_ske_tex.png\"}",
+  "texture": "039ac3f8-d48f-4e55-8199-2d4e87b4183c",
+  "subMetas": {}
+}

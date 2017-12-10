@@ -39,7 +39,7 @@
     "_cascadeOpacityEnabled": true,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0
     },
     "_contentSize": {
@@ -49,12 +49,12 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 0.3,
-    "_scaleY": 0.3,
+    "_scaleX": -0.5,
+    "_scaleY": 0.5,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 138,
-      "y": 57
+      "x": 221.6,
+      "y": -163.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -72,16 +72,16 @@
     },
     "_enabled": true,
     "_armatureName": "armatureName",
-    "_animationName": "steady",
-    "playTimes": -1,
+    "_animationName": "idle",
+    "playTimes": 0,
     "_N$dragonAsset": {
-      "__uuid__": "0ab18ee7-3615-4695-84a3-b14933104f0e"
+      "__uuid__": "53a85234-e265-4237-af66-a71b9df632eb"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "605a7849-9a20-4d09-bc1d-2207567096d7"
+      "__uuid__": "c24e35b2-f4f1-40ac-9af0-37b80dc53679"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 10,
+    "_N$_animationIndex": 4,
     "_N$timeScale": 1,
     "_N$debugBones": false
   },
@@ -93,7 +93,21 @@
       "__id__": 1
     },
     "_enabled": true,
-    "hp": 100
+    "maxHp": 100,
+    "hp": 100,
+    "hpComponent": null,
+    "attack": 10,
+    "attackRange": 150,
+    "xSpeed": 200,
+    "moveEnable": false,
+    "moveAtX": true,
+    "isPlaying": false,
+    "animationName": "idle",
+    "target": null,
+    "attackCalculate": 30,
+    "hurtBuff": 0,
+    "floor": 0,
+    "i": 0
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -103,7 +117,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "47p9l5uedDwI22PZhIkQPY",
+    "fileId": "bcKxwWE/tAiIB7K9Mm8wtv",
     "sync": false
   }
 ]

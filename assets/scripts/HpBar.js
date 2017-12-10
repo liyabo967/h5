@@ -16,6 +16,8 @@ cc.Class({
 
     init: function(maxHp){
         this.maxHp = maxHp;
+        this.hp = maxHp;
+        this.node.width = 90;
     },
 
     minus: function(value){

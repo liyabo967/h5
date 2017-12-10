@@ -20,23 +20,23 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        // let currentBgHeight = 0; 
-        // for(let i = 0; i < this.resList.length; i++) {
-        //     let nodeElement = new cc.Node();
-        //     nodeElement.setContentSize(this.resList[i].width, this.resList[i].height);
-        //     let spriteElement = nodeElement.addComponent(cc.Sprite);
+        let currentBgHeight = 0; 
+        for(let i = 0; i < this.resList.length; i++) {
+            let nodeElement = new cc.Node();
+            nodeElement.setContentSize(this.resList[i].width, this.resList[i].height);
+            let spriteElement = nodeElement.addComponent(cc.Sprite);
 
-        //     this._addSpritePic(spriteElement, this.resList[i].resUrl);
+            this._addSpritePic(spriteElement, this.resList[i].resUrl);
 
-        //     nodeElement.setAnchorPoint(0.5, 1);
-        //     nodeElement.x = 0;
-        //     nodeElement.y = - currentBgHeight;
+            nodeElement.setAnchorPoint(0.5, 1);
+            nodeElement.x = 0;
+            nodeElement.y = - currentBgHeight;
 
-        //     currentBgHeight += nodeElement.height;
+            currentBgHeight += nodeElement.height;
 
-        //     cc.log(currentBgHeight + " " + nodeElement.width + " " + nodeElement.height);
-        //     this.node.addChild(nodeElement);
-        // }
+            cc.log(currentBgHeight + " " + nodeElement.width + " " + nodeElement.height);
+            this.node.addChild(nodeElement);
+        }
     },
 
     _addSpritePic: function(container, addres){
