@@ -47,6 +47,16 @@ cc.Class({
     // use this for initialization
     onLoad: function() {
         this.timer = 0;
+        this.skillBlockPool = new cc.NodePool();
+        for (let i = 0; i < this.maxSkillNum; i++) {
+            let skillBlock = cc.instantiate(this.skillBlockPrefab);
+            skillBlock.on(cc.Node.EventType.TOUCH_START, function (event) {
+               var checkResult = this.checkErase(0);
+               this.eraseSkillBlock(checkResult[0], checkResult[1]);
+               this.game.player.getComponent('Player').playSkill();
+            }, this);
+            this.skillBlockPool.put(skillBlock);
+        }
     },
 
     init: function(game){
@@ -58,7 +68,18 @@ cc.Class({
 
         if(arrayLength < this.maxSkillNum) {
             cc.log("add skill SkillBlock");
-            var item = cc.instantiate(this.skillBlockPrefab);
+            var item = null;
+            if(this.skillBlockPool.size() > 0) {
+                item = this.skillBlockPool.get();
+            } else {
+                item = cc.instantiate(this.skillBlockPrefab);
+                item.on(cc.Node.EventType.TOUCH_START, function (event) {
+                  var checkResult = this.checkErase(0);
+                  this.eraseSkillBlock(checkResult[0], checkResult[1]);
+                  this.game.player.getComponent('Player').playSkill();
+                }, this);
+            }
+            
             var randType = Math.floor(Math.random()*this.skillBlockResList.length);
             var data = this.skillBlockResList[randType];
             this.node.addChild(item);
@@ -76,13 +97,6 @@ cc.Class({
                     item.getComponent("SkillBlock").setId(preComponent.id);
                 }
             }
-
-            item.on(cc.Node.EventType.TOUCH_START, function (event) {
-              console.log('Mouse down');
-              var checkResult = this.checkErase(0);
-              this.eraseSkillBlock(checkResult[0], checkResult[1]);
-              this.game.player.getComponent('Player').playSkill();
-            }, this);
         
             item.runAction(cc.moveBy(this.fullMoveTime * (this.maxSkillNum - arrayLength) / this.maxSkillNum, 
                 this.fullMoveDistance - (this.skillBlockWidth + this.skillBlockMargin) * arrayLength,
@@ -145,10 +159,15 @@ cc.Class({
     },
 
     eraseSkillBlock:function(left, right) {
+
+        cc.log(left + " " + right);
+
         var arrayLength = this.skillBlockArray.length;
 
         for(i = left; i <= right; i++) {
-            this.skillBlockArray[i].destroy();
+
+            this.skillBlockPool.put(this.skillBlockArray[i]);
+            // this.skillBlockArray[i].destroy();
         }
 
         for (i = right + 1; i < arrayLength; i++) {
