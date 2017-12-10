@@ -36,7 +36,7 @@ cc.Class({
         this.isPlaying = false;
         this.attackRange = 150;
         this.attackCalculate = 20;
-        this.xSpeed = 100;
+        this.xSpeed = 120;
         // 初始化键盘输入监听
         this.setInputControl();
         this.playAnim('walk');

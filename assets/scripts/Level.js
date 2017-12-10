@@ -5,6 +5,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        scorePrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         enemyPrefab: {
             default: null,
             type: cc.Prefab
@@ -46,8 +50,8 @@ cc.Class({
         cc.log('Level-------------onLoad');
 
         this.floorPositions = [-380,-690,-1030];
-        this. xBoundMin = -300;
-        this. xBoundMax = 300;
+        this. xBoundMin = -290;
+        this. xBoundMax = 290;
 
         
         this.playerComponent = this.player.getComponent('Player');
@@ -67,6 +71,12 @@ cc.Class({
         this.createEnemy();
         this.createEnemy();
         enemyIndex = 0;
+
+        let spriteNode = new cc.Node();
+        spriteNode.addComponent(cc.Sprite);
+        this.node.addChild(spriteNode);
+        //spriteNode.getComponent(cc.Sprite).spriteFrame.setTexture(cc.url.raw('textures/fightScene/diamond.png'));
+        
     },
 
     createEnemy: function () {
@@ -116,8 +126,27 @@ cc.Class({
         if(enemyIndex < enemies.length){
             this.enemyHp.getComponent('HpBar').init(100);
         }
-        //this.createEnemy();
+        
+        var fx = this.spawnScoreFX();
+        this.node.addChild(fx.node);
+        fx.node.setPosition(pos);
+        fx.play();
     },
 
+    spawnScoreFX: function () {
+        var fx;
+        if (this.scorePool.size() > 0) {
+            fx = this.scorePool.get();
+            return fx.getComponent('ScoreFX');
+        } else {
+            fx = cc.instantiate(this.scorePrefab).getComponent('ScoreFX');
+            fx.init(this);
+            return fx;
+        }
+    },
+
+    despawnScoreFX: function (scoreFX){
+        this.scorePool.put(scoreFX);
+    },
 
 });
