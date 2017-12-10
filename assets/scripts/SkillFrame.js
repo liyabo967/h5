@@ -67,7 +67,6 @@ cc.Class({
         var arrayLength = this.skillBlockArray.length ;
 
         if(arrayLength < this.maxSkillNum) {
-            cc.log("add skill SkillBlock");
             var item = null;
             if(this.skillBlockPool.size() > 0) {
                 item = this.skillBlockPool.get();
@@ -159,9 +158,6 @@ cc.Class({
     },
 
     eraseSkillBlock:function(left, right) {
-
-        cc.log(left + " " + right);
-
         var arrayLength = this.skillBlockArray.length;
 
         for(i = left; i <= right; i++) {
