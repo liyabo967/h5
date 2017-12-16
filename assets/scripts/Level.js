@@ -42,6 +42,7 @@ cc.Class({
         },
 
         enemyPool: null,
+        scorePool: null,
     },
 
     // use this for initialization
@@ -61,6 +62,7 @@ cc.Class({
         this.skillFrame.getComponent('SkillFrame').init(this);
 
         this.enemyPool = new cc.NodePool();
+        this.scorePool = new cc.NodePool();
         let initCount = 3;
         for (let i = 0; i < initCount; ++i) {
             let enemy = cc.instantiate(this.enemyPrefab); // 创建节点
@@ -126,10 +128,14 @@ cc.Class({
         if(enemyIndex < enemies.length){
             this.enemyHp.getComponent('HpBar').init(100);
         }
-        
+    },
+
+    showString: function(str,position){
+        cc.log('showString --------- '+str);
         var fx = this.spawnScoreFX();
         this.node.addChild(fx.node);
-        fx.node.setPosition(pos);
+        fx.node.setPosition(position);
+        fx.setString(str);
         fx.play();
     },
 
@@ -137,9 +143,9 @@ cc.Class({
         var fx;
         if (this.scorePool.size() > 0) {
             fx = this.scorePool.get();
-            return fx.getComponent('ScoreFX');
+            return fx.getComponent('TextAnim');
         } else {
-            fx = cc.instantiate(this.scorePrefab).getComponent('ScoreFX');
+            fx = cc.instantiate(this.scorePrefab).getComponent('TextAnim');
             fx.init(this);
             return fx;
         }

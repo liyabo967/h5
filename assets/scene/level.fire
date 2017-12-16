@@ -90,10 +90,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 40
+        "__id__": 41
       },
       {
-        "__id__": 41
+        "__id__": 42
       }
     ],
     "_prefab": null,
@@ -1027,7 +1027,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "scoreFX",
+    "_name": "scoreText",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -1041,12 +1041,15 @@
       },
       {
         "__id__": 38
+      },
+      {
+        "__id__": 39
       }
     ],
     "_prefab": {
-      "__id__": 39
+      "__id__": 40
     },
-    "_id": "c9Ht0b0bZJw6K8641nkVSF",
+    "_id": "692yZVnkpFwL8eUjkKqGJj",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -1072,8 +1075,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -38,
-      "y": -38
+      "x": 237,
+      "y": -22
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1095,7 +1098,9 @@
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
+    "_N$file": {
+      "__uuid__": "ab3df7ef-1b80-4c05-a82f-74f381fea18a"
+    },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$string": "+1",
@@ -1105,20 +1110,41 @@
     "_N$overflow": 0
   },
   {
-    "__type__": "82823fY1OtAaLMOxtO7c4VE",
+    "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 36
     },
     "_enabled": true,
-    "anim": null
+    "_defaultClip": {
+      "__uuid__": "b8b27453-6796-49a8-9a8b-7819f6a7484d"
+    },
+    "_clips": [
+      {
+        "__uuid__": "b8b27453-6796-49a8-9a8b-7819f6a7484d"
+      }
+    ],
+    "playOnLoad": false
+  },
+  {
+    "__type__": "09547mfscBJvoQephmyt9UP",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 36
+    },
+    "_enabled": true
   },
   {
     "__type__": "cc.PrefabInfo",
-    "root": null,
-    "asset": null,
-    "fileId": "c9Ht0b0bZJw6K8641nkVSF",
+    "root": {
+      "__id__": 36
+    },
+    "asset": {
+      "__uuid__": "b263cb14-aecc-42f2-ae00-78c4e8788b32"
+    },
+    "fileId": "692yZVnkpFwL8eUjkKqGJj",
     "sync": false
   },
   {
@@ -1146,7 +1172,7 @@
     },
     "_enabled": true,
     "scorePrefab": {
-      "__uuid__": "870e0bb1-f7e1-4058-876b-a23f3f8e354b"
+      "__uuid__": "b263cb14-aecc-42f2-ae00-78c4e8788b32"
     },
     "enemyPrefab": {
       "__uuid__": "c6d194e0-70d8-4814-84a6-dbcae6088629"
@@ -1169,6 +1195,7 @@
     "camera": {
       "__id__": 33
     },
-    "enemyPool": null
+    "enemyPool": null,
+    "scorePool": null
   }
 ]

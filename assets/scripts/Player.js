@@ -14,7 +14,7 @@ cc.Class({
         hpComponent:null,
         attack:10,
         attackRange:150,
-        xSpeed: 200,
+        xSpeed: 0,
         moveEnable: false,
         isPlaying: false,
         animationName: 'idle',
@@ -36,7 +36,7 @@ cc.Class({
         this.isPlaying = false;
         this.attackRange = 150;
         this.attackCalculate = 20;
-        this.xSpeed = 120;
+        this.xSpeed = 130;
         // 初始化键盘输入监听
         this.setInputControl();
         this.playAnim('walk');
@@ -58,6 +58,7 @@ cc.Class({
             this.hp = 0;
             this.node.active = false;
         }
+        this.game.showString("-"+hurt,new cc.p(-70,550));
         this.hpComponent.minus(hurt);
         cc.log('Player beAttacked-------------'+this.hp+', -'+hurt);
     },
@@ -116,7 +117,7 @@ cc.Class({
             this.attackCalculate = 40;
             this.attack = 50;
         }
-        cc.log('playAnim------------------ '+animationName);
+        //cc.log('playAnim------------------ '+animationName);
         this.isPlaying = true;
         var dragonDisplay = this.getComponent(dragonBones.ArmatureDisplay);
         dragonDisplay.armatureName = 'armatureName';
@@ -170,7 +171,7 @@ cc.Class({
         //根据当前速度更新主角的位置
         var enemy = this.game.getFirstEnemy();
         if(enemy != null && enemy.getComponent('Enemy').isAlive()){
-            cc.log('floor--------------- '+this.floor+', '+enemy.floor+', enemy.x: '+enemy.x);
+            //cc.log('floor--------------- '+this.floor+', '+enemy.floor+', enemy.x: '+enemy.x);
             this.moveEnable = true;
             if(this.floor == enemy.floor){
                 //cc.log('this same floor-------------------------------- '+this.floor);
