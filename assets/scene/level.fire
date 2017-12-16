@@ -686,7 +686,8 @@
     "attackCalculate": 30,
     "hurtBuff": 0,
     "floor": 0,
-    "i": 0
+    "normalAttack": 6,
+    "heavyAttack": 12
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -20,8 +20,9 @@ cc.Class({
         target: null,
         attackCalculate: 30,
         hurtBuff: 0,
-        floor:0,
-        i:0,
+        floor: 0,
+        normalAttack: 6,
+        heavyAttack: 12,
 
     },
 
@@ -70,14 +71,13 @@ cc.Class({
             // if(this.animationName != 'attack' && this.attackCalculate <= 0){
                 
             // }
-            //animationName = 'attack_big';
             this.attackCalculate = 30;
-            this.attack = 6;
-            // if(Math.random() < 0.25){
-            //     animationName == 'attack_big'
-            //     this.attackCalculate = 40;
-            //     this.attack = 12;
-            // }
+            this.attack = this.normalAttack;
+            if(Math.random() < 0.25){
+                animationName = 'attack_big';
+                this.attackCalculate = 40;
+                this.attack = this.heavyAttack;
+            }
         }
         //cc.log('playAnim------------------ '+animationName);
         this.isPlaying = true;
@@ -127,7 +127,7 @@ cc.Class({
                     //this.animationName = 'idle';
                 }
             }
-            this.playAnim('attack');
+            this.animationName = 'attack';
         }
     },
 });
