@@ -94,6 +94,7 @@ cc.Class({
             this.target = null;
             this.game.onEnemyKilled(this.node);
             this.animationName = 'idle';
+            return;
         }
 
         if(this.target != null && this.target.hp > 0){
@@ -102,79 +103,57 @@ cc.Class({
         } else {
             this.animationName = 'idle';
         }
-        // if(this.target == null || !this.target.isAlive()){
-        //     this.animationName = 'idle';
-        // }
         this.isPlaying = false;
-        // if(this.isAlive()){
-        //     this.playAnim(this.animationName);
-        // } else {
-        //     this.game.onEnemyKilled(this.node);
-        // }
-
-        this.playAnim(this.animationName);
-    },
-
-    update: function (dt) {
-        if(this.target != null && this.target.isAlive() && this.isAlive()){
-            
-            this.attackCalculate--;
-            //cc.log('Enemy------------------------ '+this.attackCalculate);
-            if(this.attackCalculate == 0){
-                cc.log('----------------------------------attack');
-                this.target.beAttacked(this.attack);
-                if(this.target.hp <= 0){
-                    //this.animationName = 'idle';
-                }
-            }
-            this.animationName = 'attack';
+        if(this.isAlive()){
+            this.playAnim(this.animationName);
         }
     },
 
+    attackEnemy: function(){
+        if(this.isAlive()){
+            if(this.target != null && this.target.isAlive()){
+                this.playAnim('attack');
+                this.scheduleOnce(function() {
+                    this.target.beAttacked(this.attack);
+                    this.attackEnemy();
+                }, 1);
+            } else {
+                this.target = null;
+            }
+        }
+    },
 
-    // /**
-    //  * 当碰撞产生的时候调用
-    //  * @param  {Collider} other 产生碰撞的另一个碰撞组件
-    //  * @param  {Collider} self  产生碰撞的自身的碰撞组件
-    //  */
-    // onCollisionEnter: function (other, self) {
-    //     console.log('Enemy on collision enter');
+    update: function (dt) {
+        // if(this.target != null && this.target.isAlive() && this.isAlive()){
+            
+        //     this.attackCalculate--;
+        //     //cc.log('Enemy------------------------ '+this.attackCalculate);
+        //     if(this.attackCalculate == 0){
+        //         cc.log('----------------------------------attack');
+        //         this.target.beAttacked(this.attack);
+        //         if(this.target.hp <= 0){
+        //             //this.animationName = 'idle';
+        //         }
+        //     }
+        //     this.animationName = 'attack';
+        // }
+    },
 
-    //     // 碰撞系统会计算出碰撞组件在世界坐标系下的相关的值，并放到 world 这个属性里面
-    //     var world = self.world;
+    onCollisionEnter: function (other, self) {
+        console.log('Enemy on collision enter');
+        if(other.getComponent('Player') != null){
+            this.target = other.getComponent('Player');
+            this.attackEnemy();
+        } else if(other.getComponent('MagePlayer') != null){
 
-    //     // 碰撞组件的 aabb 碰撞框
-    //     var aabb = world.aabb;
-
-    //     // 上一次计算的碰撞组件的 aabb 碰撞框
-    //     var preAabb = world.preAabb;
-
-    //     // 碰撞框的世界矩阵
-    //     var t = world.transform;
-
-    //     // 以下属性为圆形碰撞组件特有属性
-    //     var r = world.radius;
-    //     var p = world.position;
-
-    //     // 以下属性为 矩形 和 多边形 碰撞组件特有属性
-    //     var ps = world.points;
-    // },
-
-    // /**
-    //  * 当碰撞产生后，碰撞结束前的情况下，每次计算碰撞结果后调用
-    //  * @param  {Collider} other 产生碰撞的另一个碰撞组件
-    //  * @param  {Collider} self  产生碰撞的自身的碰撞组件
-    //  */
-    // onCollisionStay: function (other, self) {
-    //     console.log('Enemy on collision stay');
-    // },
-
-    // /**
-    //  * 当碰撞结束后调用
-    //  * @param  {Collider} other 产生碰撞的另一个碰撞组件
-    //  * @param  {Collider} self  产生碰撞的自身的碰撞组件
-    //  */
-    // onCollisionExit: function (other, self) {
-    //     console.log('Enemy on collision exit');
-    // },
+        } else if(other.getComponent('FireBall') != null){
+            
+        } 
+    },
+    onCollisionStay: function (other, self) {
+        console.log('Enemy on collision stay');
+    },
+    onCollisionExit: function (other, self) {
+        console.log('Enemy on collision exit');
+    },
 });

@@ -71,7 +71,7 @@ cc.Class({
         this.isPlaying = true;
         var dragonDisplay = this.getComponent(dragonBones.ArmatureDisplay);
         dragonDisplay.armatureName = 'armatureName';
-        dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this,);
+        dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this);
         dragonDisplay.playAnimation(animationName); 
         this.animationName = animationName;
     },
@@ -140,8 +140,7 @@ cc.Class({
         this.moveEnable = false;
         if(this.target == null){
             console.log("-----------------this.playAnim('attack')");
-            this.target = this.game.getFirstEnemy().getComponent('Enemy');
-            this.target.target = this;
+            this.target = other.getComponent('Enemy');
             this.playAnim('attack');
             this.attackEnemy();
         }
