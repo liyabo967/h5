@@ -1,0 +1,7 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d22ad6fc-1099-4b16-b67a-fb5af9d4ac34",
+  "atlasJson": "{\"SubTexture\":[{\"frameX\":0,\"y\":1,\"frameY\":-38,\"frameWidth\":299,\"width\":299,\"frameHeight\":217,\"height\":146,\"name\":\"hyzy_4\",\"x\":1},{\"frameX\":0,\"y\":411,\"frameY\":-32,\"frameWidth\":282,\"width\":282,\"frameHeight\":182,\"height\":129,\"name\":\"hyzy_1\",\"x\":1},{\"frameX\":-6,\"y\":282,\"frameY\":-38,\"frameWidth\":304,\"width\":298,\"frameHeight\":197,\"height\":127,\"name\":\"hyzy_2\",\"x\":1},{\"frameX\":-3,\"y\":149,\"frameY\":-38,\"frameWidth\":321,\"width\":318,\"frameHeight\":203,\"height\":131,\"name\":\"hyzy_3\",\"x\":1}],\"width\":512,\"height\":1024,\"name\":\"NewProject_1_ske\",\"imagePath\":\"NewProject_1_ske_tex.png\"}",
+  "texture": "02f87533-07ab-4974-bb4f-3f48c00eb447",
+  "subMetas": {}
+}

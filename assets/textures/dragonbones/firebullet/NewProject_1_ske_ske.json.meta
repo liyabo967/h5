@@ -1,0 +1,6 @@
+{
+  "ver": "1.0.0",
+  "uuid": "a74f3d8b-fd1c-4548-a178-a37676795b56",
+  "dragonBonesJson": "{\"frameRate\":24,\"armature\":[{\"defaultActions\":[{\"gotoAndPlay\":\"Sprite\"}],\"type\":\"Sheet\",\"frameRate\":24,\"animation\":[{\"slot\":[{\"frame\":[{\"duration\":1,\"tweenEasing\":null},{\"duration\":1,\"displayIndex\":1,\"tweenEasing\":null},{\"duration\":1,\"displayIndex\":2,\"tweenEasing\":null},{\"duration\":1,\"displayIndex\":3,\"tweenEasing\":null}],\"name\":\"sheetSlot\"}],\"frame\":[],\"ffd\":[],\"bone\":[],\"name\":\"Sprite\",\"duration\":4,\"playTimes\":0}],\"slot\":[{\"color\":{},\"displayIndex\":2,\"name\":\"sheetSlot\",\"parent\":\"root\"}],\"ik\":[],\"skin\":[{\"name\":\"\",\"slot\":[{\"display\":[{\"path\":\"hyzy_1\",\"type\":\"image\",\"name\":\"hyzy_1\",\"transform\":{}},{\"path\":\"hyzy_2\",\"type\":\"image\",\"name\":\"hyzy_2\",\"transform\":{}},{\"path\":\"hyzy_3\",\"type\":\"image\",\"name\":\"hyzy_3\",\"transform\":{}},{\"path\":\"hyzy_4\",\"type\":\"image\",\"name\":\"hyzy_4\",\"transform\":{}}],\"name\":\"sheetSlot\"}]}],\"bone\":[{\"name\":\"root\",\"transform\":{}}],\"name\":\"Sprite\",\"aabb\":{\"width\":321,\"y\":-101.5,\"height\":203,\"x\":-160.5}}],\"name\":\"NewProject_1_ske\",\"version\":\"4.5\",\"isGlobal\":0}",
+  "subMetas": {}
+}

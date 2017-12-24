@@ -17,6 +17,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        magePlayer: {
+            default: null,
+            type: cc.Node
+        },
         playerHp: {
             default: null,
             type: cc.Node
@@ -54,6 +58,7 @@ cc.Class({
         this. xBoundMin = -290;
         this. xBoundMax = 290;
 
+        this.magePlayer.getComponent('MagePlayer').init(this);
         
         this.playerComponent = this.player.getComponent('Player');
         this.playerComponent.init(this);
@@ -74,9 +79,9 @@ cc.Class({
         this.createEnemy();
         enemyIndex = 0;
 
-        let spriteNode = new cc.Node();
-        spriteNode.addComponent(cc.Sprite);
-        this.node.addChild(spriteNode);
+        // let spriteNode = new cc.Node();
+        // spriteNode.addComponent(cc.Sprite);
+        // this.node.addChild(spriteNode);
         //spriteNode.getComponent(cc.Sprite).spriteFrame.setTexture(cc.url.raw('textures/fightScene/diamond.png'));
         
     },
@@ -113,7 +118,7 @@ cc.Class({
         return enemyIndex >= enemyPositions.length;
     },
 
-    getFirstEnemy(){
+    getFirstEnemy: function(){
         if(enemyIndex < enemies.length){
             var ret = enemies[enemyIndex]
             return ret;

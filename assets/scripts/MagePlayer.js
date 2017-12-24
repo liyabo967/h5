@@ -13,7 +13,7 @@ cc.Class({
         hp: 100,
         hpComponent:null,
         attack:10,
-        attackRange:150,
+        attackRange:250,
         xSpeed: 0,
         moveEnable: false,
         isPlaying: false,
@@ -34,7 +34,7 @@ cc.Class({
     onLoad: function () {
         this.moveEnable = false;
         this.isPlaying = false;
-        this.attackRange = 150;
+        this.attackRange = 250;
         this.attackCalculate = 20;
         this.xSpeed = 130;
         // 初始化键盘输入监听
@@ -203,10 +203,10 @@ cc.Class({
             if(Direction == Left){
                 this.node.x -= this.xSpeed * dt;
                 // if(this.floor < this.game.floorPositions.length){
-                    
                 // }
                 if(this.node.x < this.game.xBoundMin){
                     Direction = Down;
+                    cc.log("Direction = Down---------------this.floor: "+this.floor);
                 }
             } else if(Direction == Right){
                 this.node.x += this.xSpeed * dt;
