@@ -54,6 +54,11 @@ cc.Class({
         cc._initDebugSetting(cc.DebugMode.INFO); 
         cc.log('Level-------------onLoad');
 
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
+        // manager.enabledDebugDraw = true;
+        // manager.enabledDrawBoundingBox = true;
+
         this.floorPositions = [-380,-690,-1030];
         this. xBoundMin = -290;
         this. xBoundMax = 290;

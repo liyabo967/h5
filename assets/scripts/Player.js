@@ -18,27 +18,18 @@ cc.Class({
         moveEnable: false,
         isPlaying: false,
         animationName: 'idle',
-        // 暂存 Game 对象的引用
-        game: {
-            default: null,
-            serializable: false
-        },
+        game: null,   // 暂存 Game 对象的引用
         target: null,
-        attackCalculate: 2,
         hurtBuff: 0,
         floor:0,
-
     },
 
     // use this for initialization
     onLoad: function () {
-        this.moveEnable = false;
-        this.isPlaying = false;
         this.attackRange = 150;
-        this.attackCalculate = 20;
         this.xSpeed = 130;
-        // 初始化键盘输入监听
-        this.setInputControl();
+        this.isPlaying = true;
+        this.moveEnable = true;
         this.playAnim('walk');
     },
 
@@ -63,42 +54,6 @@ cc.Class({
         cc.log('Player beAttacked-------------'+this.hp+', -'+hurt);
     },
 
-    setInputControl: function () {
-        var self = this;
-        //add keyboard input listener to jump, turnLeft and turnRight
-        cc.eventManager.addListener({
-            event: cc.EventListener.KEYBOARD,
-            // set a flag when key pressed
-            onKeyPressed: function(keyCode, event) {
-                switch(keyCode) {
-                    case cc.KEY.a:
-                    case cc.KEY.left:
-                        self.moveEnable = true;
-                        self.xSpeed = -50;
-                        break;
-                    case cc.KEY.d:
-                    case cc.KEY.right:
-                        self.moveEnable = true;
-                        self.xSpeed = 50;
-                        break;
-                }
-            },
-            // unset a flag when key released
-            onKeyReleased: function(keyCode, event) {
-                switch(keyCode) {
-                    case cc.KEY.a:
-                    case cc.KEY.left:
-                        self.moveEnable = false;
-                        break;
-                    case cc.KEY.d:
-                    case cc.KEY.right:
-                        self.moveEnable = false;
-                        break;
-                }
-            }
-        }, self.node);
-    },
-
     playSkill: function(){
         this.playAnim('fish');
     },
@@ -108,13 +63,8 @@ cc.Class({
             return;
         }
         if(animationName == 'attack'){
-            this.attackCalculate = 30;
             this.attack = 15;
         } else if(animationName == 'fish'){
-            // if(this.animationName != 'fish' && this.attackCalculate <= 0){
-                
-            // }
-            this.attackCalculate = 40;
             this.attack = 50;
         }
         //cc.log('playAnim------------------ '+animationName);
@@ -131,80 +81,33 @@ cc.Class({
             this.animationName = 'attack';
             this.attack = 10;
         }
-
         if(this.game.isWin()){
             this.animationName = 'win';
             this.moveEnable = false;
         }
-
         this.isPlaying = false;
         if(this.isAlive()){
             this.playAnim(this.animationName);
         }
     },
+
+    attackEnemy: function(){
+        if(this.target != null && this.target.isAlive()){
+            this.scheduleOnce(function() {
+                this.target.beAttacked(this.attack);
+                this.attackEnemy();
+            }, 1);
+        } else {
+            this.target = null;
+        }
+    },
     
     update: function (dt) {
-        //cc.log('update: '+dt+',times------------: '+this.i)
-        if(this.target != null && this.target.isAlive()){
-            this.attackCalculate--;
-            //cc.log('this.attackCalculate------------------------ '+this.attackCalculate);
-            if(this.attackCalculate == 0){
-                cc.log('----------------------------------attack');
-                this.target.beAttacked(this.attack);
-                if(this.target.hp <= 0){
-                    this.target = null;
-                    if(this.game.isWin()){
-                        this.moveEnable = false;
-                        this.animationName = 'win';
-                    }
-                    console.log('====================== enemy died');
-                }
-            }
-        }
-
-        if(this.game.isWin()){
-            this.animationName = 'win';
-        } else {
-            this.moveEnable = true;
-        }
-
-        var enemy = this.game.getFirstEnemy();
-        if(enemy != null && enemy.getComponent('Enemy').isAlive()){
-            //cc.log('floor--------------- '+this.floor+', '+enemy.floor+', enemy.x: '+enemy.x);
-            this.moveEnable = true;
-            if(this.floor == enemy.floor){
-                //cc.log('this same floor-------------------------------- '+this.floor);
-                var enemyAttackable = false;
-                if((Direction == Left) && (this.node.x - this.attackRange <= enemy.x)){
-                    enemyAttackable = true;
-                } 
-                if((Direction == Right) && (this.node.x + this.attackRange >= enemy.x)){
-                    enemyAttackable = true;
-                }
-                if(enemyAttackable){
-                    //cc.log('enemyAttackable--------------- '+enemyAttackable);
-                    this.moveEnable = false;
-                    if(this.target == null){
-                        console.log("-----------------this.playAnim('attack')");
-                        this.target = this.game.getFirstEnemy().getComponent('Enemy');
-                        this.target.target = this;
-                        this.playAnim('attack');
-                    }
-                }
-            }
-        }
-
         //根据当前速度更新主角的位置
         if(this.moveEnable){
-            // if(this.animationName != 'walk'){
-            //     this.playAnim('walk');
-            // }
             this.animationName = 'walk';
             if(Direction == Left){
                 this.node.x -= this.xSpeed * dt;
-                // if(this.floor < this.game.floorPositions.length){
-                    
-                // }
                 if(this.node.x < this.game.xBoundMin){
                     Direction = Down;
                 }
@@ -228,9 +131,28 @@ cc.Class({
                 }
             }
         } else {
-            //this.playAnim('idle');
             this.animationName = 'idle';
         }
+    },
+
+    onCollisionEnter: function (other, self) {
+        console.log('Player on collision enter');
+        this.moveEnable = false;
+        if(this.target == null){
+            console.log("-----------------this.playAnim('attack')");
+            this.target = this.game.getFirstEnemy().getComponent('Enemy');
+            this.target.target = this;
+            this.playAnim('attack');
+            this.attackEnemy();
+        }
+    },
+    onCollisionStay: function (other, self) {
+        //console.log('Player on collision stay');
+    },
+    onCollisionExit: function (other, self) {
+        console.log('Player on collision exit');
+        this.moveEnable = true;
+        this.playAnim('walk');
     },
 
 });
