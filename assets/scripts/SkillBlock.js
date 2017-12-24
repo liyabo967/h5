@@ -4,7 +4,8 @@ cc.Class({
     properties: {
         id: 0,
         icon: cc.Sprite,
-        type: 0
+        type: 0,
+        color: cc.Color
     },
 
     // use this for initialization
@@ -16,6 +17,7 @@ cc.Class({
         this.id = data.id;
         this.icon.spriteFrame = data.iconSF;
         this.type = data.type;
+        this.color = data.color;
     },
 
     setId: function(id) {
