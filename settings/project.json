@@ -1,23 +1,29 @@
 {
-  "start-scene": "current",
-  "group-list": [
-    "default"
-  ],
   "collision-matrix": [
     [
+      false,
       true
+    ],
+    [
+      true,
+      false
     ]
   ],
-  "excluded-modules": [],
-  "design-resolution-width": 750,
   "design-resolution-height": 1334,
-  "fit-width": false,
+  "design-resolution-width": 750,
+  "excluded-modules": [],
   "fit-height": true,
-  "use-project-simulator-setting": false,
+  "fit-width": false,
+  "group-list": [
+    "default",
+    "hero"
+  ],
   "simulator-orientation": false,
-  "use-customize-simulator": false,
   "simulator-resolution": {
-    "width": 750,
-    "height": 1334
-  }
+    "height": 1334,
+    "width": 750
+  },
+  "start-scene": "current",
+  "use-customize-simulator": false,
+  "use-project-simulator-setting": false
 }

@@ -83,12 +83,6 @@ cc.Class({
         this.createEnemy();
         this.createEnemy();
         enemyIndex = 0;
-
-        // let spriteNode = new cc.Node();
-        // spriteNode.addComponent(cc.Sprite);
-        // this.node.addChild(spriteNode);
-        //spriteNode.getComponent(cc.Sprite).spriteFrame.setTexture(cc.url.raw('textures/fightScene/diamond.png'));
-        
     },
 
     createEnemy: function () {
@@ -141,7 +135,7 @@ cc.Class({
     },
 
     showString: function(str,position){
-        cc.log('showString --------- '+str);
+        //cc.log('showString --------- '+str);
         var fx = this.spawnScoreFX();
         this.node.addChild(fx.node);
         fx.node.setPosition(position);

@@ -124,36 +124,30 @@ cc.Class({
     },
 
     update: function (dt) {
-        // if(this.target != null && this.target.isAlive() && this.isAlive()){
-            
-        //     this.attackCalculate--;
-        //     //cc.log('Enemy------------------------ '+this.attackCalculate);
-        //     if(this.attackCalculate == 0){
-        //         cc.log('----------------------------------attack');
-        //         this.target.beAttacked(this.attack);
-        //         if(this.target.hp <= 0){
-        //             //this.animationName = 'idle';
-        //         }
-        //     }
-        //     this.animationName = 'attack';
-        // }
+
     },
 
     onCollisionEnter: function (other, self) {
-        console.log('Enemy on collision enter');
+        //console.log('Enemy on collision enter');
+        var collisionComponent = null;
         if(other.getComponent('Player') != null){
-            this.target = other.getComponent('Player');
-            this.attackEnemy();
-        } else if(other.getComponent('MagePlayer') != null){
-
-        } else if(other.getComponent('FireBall') != null){
+            collisionComponent = other.getComponent('Player');
+        } 
+        if(other.getComponent('MagePlayer') != null){
+            collisionComponent = other.getComponent('MagePlayer'); 
+        } 
+        if(other.getComponent('FireBall') != null){
             
         } 
+        if(this.target == null){
+            this.target = collisionComponent;
+            this.attackEnemy();
+        }
     },
     onCollisionStay: function (other, self) {
-        console.log('Enemy on collision stay');
+        //console.log('Enemy on collision stay');
     },
     onCollisionExit: function (other, self) {
-        console.log('Enemy on collision exit');
+        //console.log('Enemy on collision exit');
     },
 });

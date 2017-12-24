@@ -9,6 +9,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        fireballPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         maxHp:100,
         hp: 100,
         hpComponent:null,
@@ -31,6 +35,18 @@ cc.Class({
         this.isPlaying = true;
         this.moveEnable = true;
         this.playAnim('walk');
+
+        this.fireballPool = new cc.NodePool();
+        let initCount = 2;
+        for (let i = 0; i < initCount; ++i) {
+            let fireball = cc.instantiate(this.fireballPrefab);
+            this.fireballPool.put(fireball);
+        }
+
+
+        var fireball = this.spawnFireBall();
+                    this.game.node.addChild(fireball.node);
+                    fireball.node.setPosition(cc.p(200,200));
     },
 
     init: function (game) {
@@ -51,7 +67,7 @@ cc.Class({
         }
         this.game.showString("-"+hurt,new cc.p(-70,550));
         this.hpComponent.minus(hurt);
-        cc.log('Player beAttacked-------------'+this.hp+', -'+hurt);
+        //cc.log('Player beAttacked-------------'+this.hp+', -'+hurt);
     },
 
     playSkill: function(){
@@ -71,7 +87,7 @@ cc.Class({
         this.isPlaying = true;
         var dragonDisplay = this.getComponent(dragonBones.ArmatureDisplay);
         dragonDisplay.armatureName = 'armatureName';
-        dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this,);
+        dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this);
         dragonDisplay.playAnimation(animationName); 
         this.animationName = animationName;
     },
@@ -91,15 +107,38 @@ cc.Class({
         }
     },
 
+    
     attackEnemy: function(){
-        if(this.target != null && this.target.isAlive()){
-            this.scheduleOnce(function() {
-                this.target.beAttacked(this.attack);
-                this.attackEnemy();
-            }, 1);
-        } else {
-            this.target = null;
+        if(this.isAlive()){
+            if(this.target != null && this.target.isAlive()){
+                this.scheduleOnce(function() {
+                    var fireball = this.spawnFireBall();
+                    this.game.node.addChild(fireball.node);
+                    fireball.node.setPosition(0,0,100);
+                    fireball.attack();
+                    
+                    this.attackEnemy();
+                }, 2);
+            } else {
+                this.target = null;
+            }
         }
+    },
+
+    spawnFireBall: function(){
+        let fireball = null;
+        if (this.fireballPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            fireball = this.fireballPool.get();
+            return fireball.getComponent('Fireball');
+        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            fireball = cc.instantiate(this.fireballPrefab).getComponent('Fireball');
+            fireball.init(this);
+            return fireball;
+        }
+    },
+
+    despawnFireBall: function(fireball){
+        this.fireballPool.put(fireball);
     },
     
     update: function (dt) {
@@ -140,8 +179,7 @@ cc.Class({
         this.moveEnable = false;
         if(this.target == null){
             console.log("-----------------this.playAnim('attack')");
-            this.target = this.game.getFirstEnemy().getComponent('Enemy');
-            this.target.target = this;
+            this.target = other.getComponent('Enemy');
             this.playAnim('attack');
             this.attackEnemy();
         }
@@ -150,7 +188,6 @@ cc.Class({
         //console.log('Player on collision stay');
     },
     onCollisionExit: function (other, self) {
-        console.log('Player on collision exit');
         this.moveEnable = true;
         this.playAnim('walk');
     },
