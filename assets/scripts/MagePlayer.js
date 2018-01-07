@@ -13,6 +13,10 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        firemeteorPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         maxHp:100,
         hp: 100,
         hpComponent:null,
@@ -37,16 +41,18 @@ cc.Class({
         this.playAnim('walk');
 
         this.fireballPool = new cc.NodePool();
-        let initCount = 2;
+        this.firemeteorPool = new cc.NodePool();
+
+        let initCount = 1;
         for (let i = 0; i < initCount; ++i) {
             let fireball = cc.instantiate(this.fireballPrefab);
             this.fireballPool.put(fireball);
         }
 
-
-        var fireball = this.spawnFireBall();
-                    this.game.node.addChild(fireball.node);
-                    fireball.node.setPosition(cc.p(200,200));
+        for (let i = 0; i < initCount; ++i) {
+            let firemeteor = cc.instantiate(this.firemeteorPrefab);
+            this.firemeteorPool.put(firemeteor);
+        }
     },
 
     init: function (game) {
@@ -71,7 +77,16 @@ cc.Class({
     },
 
     playSkill: function(){
-        this.playAnim('fish');
+        if(this.target != null){
+            var firemeteor = this.spawnFiremeteor();
+            if(firemeteor != null){
+                firemeteor.setPosition(this.target.node.x,this.target.node.y + 120);
+                firemeteor.getComponent('Firemeteor').init(this,this.target);
+                this.game.node.addChild(firemeteor);
+                this.game.camera.getComponent(cc.Camera).addTarget(firemeteor);
+                // firemeteor.getComponent('Firemeteor').attack();
+            }
+        }
     },
 
     playAnim: function(animationName){
@@ -80,13 +95,16 @@ cc.Class({
         }
         if(animationName == 'attack'){
             this.attack = 15;
-        } else if(animationName == 'fish'){
+        } else if(animationName == 'rage'){
             this.attack = 50;
         }
         //cc.log('playAnim------------------ '+animationName);
         this.isPlaying = true;
         var dragonDisplay = this.getComponent(dragonBones.ArmatureDisplay);
         dragonDisplay.armatureName = 'armatureName';
+        if(animationName == 'attack'){
+            // dragonDisplay.timeScale = 0.5;
+        }
         dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this);
         dragonDisplay.playAnimation(animationName); 
         this.animationName = animationName;
@@ -107,38 +125,59 @@ cc.Class({
         }
     },
 
-    
     attackEnemy: function(){
         if(this.isAlive()){
             if(this.target != null && this.target.isAlive()){
                 this.scheduleOnce(function() {
                     var fireball = this.spawnFireBall();
-                    this.game.node.addChild(fireball.node);
-                    fireball.node.setPosition(0,0,100);
-                    fireball.attack();
-                    
+                    if(fireball != null){
+                        this.game.node.addChild(fireball);
+                        this.game.camera.getComponent(cc.Camera).addTarget(fireball);
+                        fireball.setPosition(this.node.x, this.node.y + 50);
+                        fireball.getComponent('Fireball').init(this);
+                        fireball.getComponent('Fireball').attack();
+                    }
+                
                     this.attackEnemy();
-                }, 2);
+                }, 1.5);
             } else {
                 this.target = null;
             }
         }
     },
 
-    spawnFireBall: function(){
-        let fireball = null;
-        if (this.fireballPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-            fireball = this.fireballPool.get();
-            return fireball.getComponent('Fireball');
-        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-            fireball = cc.instantiate(this.fireballPrefab).getComponent('Fireball');
-            fireball.init(this);
-            return fireball;
-        }
+    enemyKilled: function(){
+        cc.log('magePlayer killed an enemy');
+        this.target = null;
     },
 
+    spawnFireBall: function(){
+        let fireball = null;
+        // if (this.fireballPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+        //     fireball = this.fireballPool.get();
+        // } 
+        // else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+        //     fireball = cc.instantiate(this.fireballPrefab);
+        // }
+        fireball = cc.instantiate(this.fireballPrefab);
+        return fireball;
+    },
     despawnFireBall: function(fireball){
         this.fireballPool.put(fireball);
+    },
+
+    spawnFiremeteor: function(){
+        let firemeteor = null;
+        if (this.firemeteorPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            firemeteor = this.firemeteorPool.get();
+        } 
+        // else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+        //     fireball = cc.instantiate(this.fireballPrefab);
+        // }
+        return firemeteor;
+    },
+    despawnFiremeteor: function(firemeteor){
+        this.firemeteorPool.put(firemeteor);
     },
     
     update: function (dt) {

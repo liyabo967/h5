@@ -3,7 +3,8 @@ var SkillBlockResList = cc.Class({
     name: 'SkillBlockResList',
     properties: {
         id: 0,
-        iconSF: cc.SpriteFrame
+        iconSF: cc.SpriteFrame,
+        color: cc.Color
     }
 });
 
@@ -41,21 +42,34 @@ cc.Class({
             default: [],
             type: [cc.Prefab],
             visible: false
+        },
+
+        skillDisappearPrefab: {
+            default:null,
+            type: cc.Prefab
         }
     },
 
     // use this for initialization
     onLoad: function() {
         this.timer = 0;
+        // 技能块池
         this.skillBlockPool = new cc.NodePool();
         for (let i = 0; i < this.maxSkillNum; i++) {
             let skillBlock = cc.instantiate(this.skillBlockPrefab);
             skillBlock.on(cc.Node.EventType.TOUCH_START, function (event) {
                var checkResult = this.checkErase(0);
                this.eraseSkillBlock(checkResult[0], checkResult[1]);
-               this.game.player.getComponent('Player').playSkill();
+
+               this.game.playSkill(checkResult[2],checkResult[3]);
             }, this);
             this.skillBlockPool.put(skillBlock);
+        }
+        // 技能消失特效池
+        this.skillDisappearPool = new cc.NodePool();
+        for (let i = 0; i < 5; i++) {
+            let skillDisappear = cc.instantiate(this.skillDisappearPrefab);
+            this.skillDisappearPool.put(skillDisappear);
         }
     },
 
@@ -85,7 +99,8 @@ cc.Class({
             item.getComponent("SkillBlock").init({
                 id: new Date().getTime(),
                 iconSF: data.iconSF,
-                type: data.id
+                type: data.id,
+                color:data.color
             });
             item.x = this.skillBlockOriginX;
             item.y = this.skillBlockOriginY;
@@ -154,32 +169,46 @@ cc.Class({
         var skillType = this.skillBlockArray[index].getComponent("SkillBlock").type;
         var skillIntensity = right - left + 1;
 
-        return [left, right];
+        return [left, right, skillType, skillIntensity];
     },
 
     eraseSkillBlock:function(left, right) {
         var arrayLength = this.skillBlockArray.length;
 
         for(i = left; i <= right; i++) {
+            // 获取技能消失特效
+            let skillDisappearItem = null;
+            if(this.skillDisappearPool.size() > 0) {
+                skillDisappearItem = this.skillDisappearPool.get();
+            } else {
+                skillDisappearItem = cc.instantiate(this.skillDisappearPrefab);
+            }
+            skillDisappearItem.x = this.skillBlockArray[i].x;
+            skillDisappearItem.y = this.skillBlockArray[i].y;
+            skillDisappearItem.color = this.skillBlockArray[i].getComponent("SkillBlock").color;
+            this.node.addChild(skillDisappearItem);
+            skillDisappearItem.getComponent("SkillDisappear").blink(function(){
+                    this.skillDisappearPool.put(skillDisappearItem);
+                }, this);
 
             this.skillBlockPool.put(this.skillBlockArray[i]);
-            // this.skillBlockArray[i].destroy();
         }
 
         for (i = right + 1; i < arrayLength; i++) {
             if(i < arrayLength-1) {
-                this.skillBlockArray[i].runAction(cc.moveBy(this.fullMoveTime * (right - left + 1) / this.maxSkillNum, 
+                this.skillBlockArray[i].runAction(cc.sequence(cc.delayTime(0.3),
+                    cc.moveBy(this.fullMoveTime * (right - left + 1) / this.maxSkillNum, 
                     (this.skillBlockWidth + this.skillBlockMargin) * (right - left + 1),
-                    0));
+                    0)));
             } else {
                 var finished = cc.callFunc(function(target, gap) {
                     this.skillBlockArray.splice(gap[0], gap[1] - gap[0] + 1);
                 }, this, [left, right]);
-                this.skillBlockArray[i].runAction(cc.sequence(cc.moveBy(this.fullMoveTime * (right - left + 1) / this.maxSkillNum, 
+                this.skillBlockArray[i].runAction(cc.sequence(cc.delayTime(0.3), 
+                    cc.moveBy(this.fullMoveTime * (right - left + 1) / this.maxSkillNum, 
                     (this.skillBlockWidth + this.skillBlockMargin) * (right - left + 1),
                     0), finished));
             }
         }
     }
-
 });

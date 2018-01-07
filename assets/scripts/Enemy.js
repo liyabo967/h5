@@ -56,7 +56,7 @@ cc.Class({
         }
         this.game.showString("-"+hurt,new cc.p(-70,460));
         this.hpComponent.minus(hurt);
-        cc.log('Enemy beAttacked-------------'+this.hp+', -'+hurt);
+        //cc.log('Enemy beAttacked-------------'+this.hp+', -'+hurt);
     },
 
     playSkill: function(){

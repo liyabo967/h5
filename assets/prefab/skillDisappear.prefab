@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "fireball",
+    "_name": "NewProject_ske",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -22,13 +22,10 @@
       },
       {
         "__id__": 3
-      },
-      {
-        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 4
     },
     "_id": "",
     "_opacity": 255,
@@ -52,19 +49,19 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 0.5,
-    "_scaleY": 0.5,
+    "_scaleX": 1,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 162,
-      "y": 48
+      "x": 0,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
     "_localZOrder": 0,
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
-    "groupIndex": 1
+    "groupIndex": 0
   },
   {
     "__type__": "dragonBones.ArmatureDisplay",
@@ -75,49 +72,27 @@
     },
     "_enabled": true,
     "_armatureName": "Sprite",
-    "_animationName": "Sprite",
+    "_animationName": "",
     "playTimes": -1,
     "_N$dragonAsset": {
-      "__uuid__": "a74f3d8b-fd1c-4548-a178-a37676795b56"
+      "__uuid__": "55443b6b-fc81-4435-a244-4a7c96b5b99b"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "d22ad6fc-1099-4b16-b67a-fb5af9d4ac34"
+      "__uuid__": "73cdf916-9d92-47f6-a998-3a72e13585f5"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 1,
+    "_N$_animationIndex": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false
   },
   {
-    "__type__": "cc.BoxCollider",
+    "__type__": "0619bB5uvJDDpSn/0C14vz4",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
-    "tag": 0,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": -14,
-      "y": 26
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 245,
-      "height": 156
-    }
-  },
-  {
-    "__type__": "63f61MBbZlHEaBGWJVCDLPp",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "attackPower": 10,
-    "target": null
+    "_enabled": true
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -127,7 +102,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d77xQqQzNEQoVftW9daZ6e",
+    "fileId": "31DYn23h5Mda4aai+whJUO",
     "sync": false
   }
 ]

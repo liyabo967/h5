@@ -90,16 +90,22 @@
       },
       {
         "__id__": 47
+      },
+      {
+        "__id__": 52
+      },
+      {
+        "__id__": 55
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 52
+        "__id__": 59
       },
       {
-        "__id__": 53
+        "__id__": 60
       }
     ],
     "_prefab": null,
@@ -568,7 +574,7 @@
     "_scaleY": 0.5,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 322,
+      "x": 330,
       "y": -384
     },
     "_skewX": 0,
@@ -609,7 +615,10 @@
     },
     "_enabled": true,
     "fireballPrefab": {
-      "__uuid__": "93dedea7-82fb-496e-8bd2-d9cf8979fb6d"
+      "__uuid__": "9b69b7e9-e46e-4c9f-8141-c9eb3f42ff5c"
+    },
+    "firemeteorPrefab": {
+      "__uuid__": "2551f4de-589a-4b8f-826b-f35ef30f6c61"
     },
     "maxHp": 100,
     "hp": 100,
@@ -1086,13 +1095,23 @@
     "skillBlockMargin": 18,
     "skillBlockOriginX": -440,
     "skillBlockOriginY": 65,
-    "skillBlockArray": []
+    "skillBlockArray": [],
+    "skillDisappearPrefab": {
+      "__uuid__": "d071dc9b-88c2-493e-9e84-bc696a34495a"
+    }
   },
   {
     "__type__": "SkillBlockResList",
     "id": 0,
     "iconSF": {
       "__uuid__": "cac06d56-3c68-4a29-b17f-d1a86c321eec"
+    },
+    "color": {
+      "__type__": "cc.Color",
+      "r": 30,
+      "g": 218,
+      "b": 47,
+      "a": 255
     }
   },
   {
@@ -1100,6 +1119,13 @@
     "id": 1,
     "iconSF": {
       "__uuid__": "3c8f3778-1c1d-4ccb-a3b2-ea433492e539"
+    },
+    "color": {
+      "__type__": "cc.Color",
+      "r": 30,
+      "g": 218,
+      "b": 47,
+      "a": 255
     }
   },
   {
@@ -1107,6 +1133,13 @@
     "id": 2,
     "iconSF": {
       "__uuid__": "0d0d9f80-294a-4b59-8773-cc6f4c294a60"
+    },
+    "color": {
+      "__type__": "cc.Color",
+      "r": 224,
+      "g": 59,
+      "b": 191,
+      "a": 255
     }
   },
   {
@@ -1114,6 +1147,13 @@
     "id": 3,
     "iconSF": {
       "__uuid__": "7f09c1bc-eb37-4ca9-8754-7c64ff129e9e"
+    },
+    "color": {
+      "__type__": "cc.Color",
+      "r": 250,
+      "g": 189,
+      "b": 9,
+      "a": 255
     }
   },
   {
@@ -1166,8 +1206,8 @@
     "_scaleY": 0.5,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -12,
-      "y": -76
+      "x": 286,
+      "y": 476
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1226,7 +1266,6 @@
       "__id__": 39
     },
     "_enabled": true,
-    "attackPower": 10,
     "target": null
   },
   {
@@ -1235,7 +1274,7 @@
       "__id__": 39
     },
     "asset": {
-      "__uuid__": "93dedea7-82fb-496e-8bd2-d9cf8979fb6d"
+      "__uuid__": "9b69b7e9-e46e-4c9f-8141-c9eb3f42ff5c"
     },
     "fileId": "d77xQqQzNEQoVftW9daZ6e",
     "sync": false
@@ -1453,6 +1492,194 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "wildfire",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": false,
+    "_components": [
+      {
+        "__id__": 53
+      }
+    ],
+    "_prefab": {
+      "__id__": 54
+    },
+    "_id": "3323U8gSdFoqBTwxaxhMo2",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 159,
+      "y": 288
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "dragonBones.ArmatureDisplay",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 52
+    },
+    "_enabled": true,
+    "_armatureName": "Sprite",
+    "_animationName": "Sprite",
+    "playTimes": -1,
+    "_N$dragonAsset": {
+      "__uuid__": "c5bc77c0-3b8a-47fc-a548-0d2c0cf0c6c6"
+    },
+    "_N$dragonAtlasAsset": {
+      "__uuid__": "e9d199f1-be92-4847-a72c-798c0c9609e6"
+    },
+    "_N$_defaultArmatureIndex": 0,
+    "_N$_animationIndex": 1,
+    "_N$timeScale": 1,
+    "_N$debugBones": false
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 52
+    },
+    "asset": {
+      "__uuid__": "8ffeac4c-a3fd-40b1-a4eb-b720a9d28fc5"
+    },
+    "fileId": "3323U8gSdFoqBTwxaxhMo2",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "firemeteor",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": false,
+    "_components": [
+      {
+        "__id__": 56
+      },
+      {
+        "__id__": 57
+      }
+    ],
+    "_prefab": {
+      "__id__": 58
+    },
+    "_id": "0eoljQMEBIYLNXoX2+RoLW",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 193,
+      "y": 330
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "dragonBones.ArmatureDisplay",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 55
+    },
+    "_enabled": true,
+    "_armatureName": "Sprite",
+    "_animationName": "Sprite",
+    "playTimes": -1,
+    "_N$dragonAsset": {
+      "__uuid__": "d5763796-884d-4313-9b5d-345974fb7ae5"
+    },
+    "_N$dragonAtlasAsset": {
+      "__uuid__": "34cd6608-616a-4a98-bab4-2cd82d01f84d"
+    },
+    "_N$_defaultArmatureIndex": 0,
+    "_N$_animationIndex": 1,
+    "_N$timeScale": 1,
+    "_N$debugBones": false
+  },
+  {
+    "__type__": "22805eoO+FExaHUTeNHZORL",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 55
+    },
+    "_enabled": true,
+    "speed": 10,
+    "target": null
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 55
+    },
+    "asset": {
+      "__uuid__": "2551f4de-589a-4b8f-826b-f35ef30f6c61"
+    },
+    "fileId": "0eoljQMEBIYLNXoX2+RoLW",
+    "sync": false
+  },
+  {
     "__type__": "cc.Canvas",
     "_name": "",
     "_objFlags": 0,
@@ -1476,6 +1703,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "fireballPrefab": {
+      "__uuid__": "9b69b7e9-e46e-4c9f-8141-c9eb3f42ff5c"
+    },
     "scorePrefab": {
       "__uuid__": "b263cb14-aecc-42f2-ae00-78c4e8788b32"
     },

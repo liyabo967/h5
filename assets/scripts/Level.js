@@ -5,6 +5,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        fireballPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         scorePrefab: {
             default: null,
             type: cc.Prefab
@@ -60,15 +64,17 @@ cc.Class({
         // manager.enabledDrawBoundingBox = true;
 
         this.floorPositions = [-380,-690,-1030];
-        this. xBoundMin = -290;
-        this. xBoundMax = 290;
+        this.xBoundMin = -290;
+        this.xBoundMax = 290;
 
-        this.magePlayer.getComponent('MagePlayer').init(this);
-        
         this.playerComponent = this.player.getComponent('Player');
         this.playerComponent.init(this);
-        this.enemyComponent = this.enemy.getComponent('Enemy')
-        this.enemyComponent.init(this);
+        this.mageComponent = this.magePlayer.getComponent('MagePlayer');
+        this.mageComponent.init(this);
+        
+        
+        // this.enemyComponent = this.enemy.getComponent('Enemy')
+        // this.enemyComponent.init(this);
         this.skillFrame.getComponent('SkillFrame').init(this);
 
         this.enemyPool = new cc.NodePool();
@@ -83,6 +89,12 @@ cc.Class({
         this.createEnemy();
         this.createEnemy();
         enemyIndex = 0;
+
+
+        // var fireball = cc.instantiate(this.fireballPrefab);
+        // fireball.setPosition(0,0);
+        // this.node.addChild(fireball);
+        
     },
 
     createEnemy: function () {
@@ -141,6 +153,16 @@ cc.Class({
         fx.node.setPosition(position);
         fx.setString(str);
         fx.play();
+    },
+
+    playSkill: function(skillType, skillIntensity){
+        cc.log('skillType: '+skillType+', skillIntensity: '+skillIntensity);
+        if(skillType == 1){
+            this.playerComponent.playSkill();
+        } else if(skillType == 2){
+            this.mageComponent.playSkill();
+        }
+        // this.mageComponent.playSkill();
     },
 
     spawnScoreFX: function () {
