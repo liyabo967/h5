@@ -27,7 +27,7 @@ cc.Class({
         } else {
             this.node.scaleX = -0.5;
         }
-        cc.log('fire meteor -------------- attack');
+        cc.log('fire meteor attack, this.node.scaleX: '+this.node.scaleX);
         var dragonDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
         dragonDisplay.armatureName = 'Sprite';
         dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this);

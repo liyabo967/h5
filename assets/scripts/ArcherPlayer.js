@@ -9,6 +9,14 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        skillPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
+        firemeteorPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         maxHp:100,
         hp: 100,
         hpComponent:null,
@@ -28,9 +36,19 @@ cc.Class({
     onLoad: function () {
         this.attackRange = 150;
         this.xSpeed = 130;
+        this.hp = 100;
         this.isPlaying = true;
         this.moveEnable = true;
         this.playAnim('walk');
+
+        this.skillPool = new cc.NodePool();
+       
+        let initCount = 2;
+        for (let i = 0; i < initCount; ++i) {
+            let skill = cc.instantiate(this.skillPrefab);
+            this.skillPool.put(skill);
+        }
+
     },
 
     init: function (game) {
@@ -56,22 +74,35 @@ cc.Class({
     },
 
     playSkill: function(){
-        this.playAnim('fish');
+        if(this.target != null){
+            var firemeteor = this.spawnFiremeteor();
+            if(firemeteor != null){
+                cc.log('magePlayer play skill fire meteor');
+                firemeteor.setPosition(this.target.node.x,this.target.node.y + 100);
+                firemeteor.getComponent('Firemeteor').init(this,this.target);
+                this.game.node.addChild(firemeteor);
+                this.game.camera.getComponent(cc.Camera).addTarget(firemeteor);
+                // firemeteor.getComponent('Firemeteor').attack();
+            }
+        }
     },
 
     playAnim: function(animationName){
         if(this.isPlaying && this.animationName == animationName){
             return;
         }
-        if(animationName == 'attack'){
+        if(animationName == 'shoot'){
             this.attack = 15;
-        } else if(animationName == 'fish'){
+        } else if(animationName == 'rage'){
             this.attack = 50;
         }
         //cc.log('playAnim------------------ '+animationName);
         this.isPlaying = true;
         var dragonDisplay = this.getComponent(dragonBones.ArmatureDisplay);
         dragonDisplay.armatureName = 'armatureName';
+        if(animationName == 'attack'){
+            // dragonDisplay.timeScale = 0.5;
+        }
         dragonDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.aramtureEventHandler,this);
         dragonDisplay.playAnimation(animationName); 
         this.animationName = animationName;
@@ -79,7 +110,7 @@ cc.Class({
 
     aramtureEventHandler: function(){
         if(this.target != null && this.target.isAlive()){
-            this.animationName = 'attack';
+            this.animationName = 'shoot';
             this.attack = 10;
         }
         if(this.game.isWin()){
@@ -93,14 +124,56 @@ cc.Class({
     },
 
     attackEnemy: function(){
-        if(this.target != null && this.target.isAlive()){
-            // this.target.beAttacked(this.attack);
-            this.scheduleOnce(function() {
-                this.attackEnemy();
-            }, 1);
-        } else {
-            this.target = null;
+        if(this.isAlive()){
+            if(this.target != null && this.target.isAlive()){
+                var skill = this.spawnSkill();
+                if(skill != null ){
+                    this.game.node.addChild(skill);
+                    skill.setPosition(this.node.x, this.node.y + 50);
+                    this.game.camera.getComponent(cc.Camera).addTarget(skill);
+                    skill.getComponent('Arrow').init(this);
+                    skill.getComponent('Arrow').shoot(1,450,50,200,1.5,50);
+                }
+                this.scheduleOnce(function() {
+                    this.attackEnemy();
+                }, 1.5);
+            } else {
+                this.target = null;
+            }
         }
+    },
+
+    enemyKilled: function(){
+        cc.log('magePlayer killed an enemy');
+        this.target = null;
+    },
+
+    spawnSkill: function(){
+        let skill = null;
+        if (this.skillPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            skill = this.skillPool.get();
+        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            skill = cc.instantiate(this.skillPrefab);
+        }
+        //fireball = cc.instantiate(this.fireballPrefab);
+        return skill;
+    },
+    despawnSkill: function(skill){
+        this.skillPool.put(skill);
+    },
+
+    spawnFiremeteor: function(){
+        let firemeteor = null;
+        if (this.firemeteorPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            firemeteor = this.firemeteorPool.get();
+        } 
+        else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            firemeteor = cc.instantiate(this.firemeteorPrefab);
+        }
+        return firemeteor;
+    },
+    despawnFiremeteor: function(firemeteor){
+        this.firemeteorPool.put(firemeteor);
     },
     
     update: function (dt) {
@@ -137,12 +210,12 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        //console.log('Player on collision enter');
+        console.log('Player on collision enter');
         this.moveEnable = false;
         if(this.target == null){
             console.log("-----------------this.playAnim('attack')");
             this.target = other.getComponent('Enemy');
-            this.playAnim('attack');
+            this.playAnim('shoot');
             this.attackEnemy();
         }
     },
@@ -150,7 +223,6 @@ cc.Class({
         //console.log('Player on collision stay');
     },
     onCollisionExit: function (other, self) {
-        console.log('Player on collision exit');
         this.moveEnable = true;
         this.playAnim('walk');
     },

@@ -25,6 +25,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        archerPlayer: {
+            default: null,
+            type: cc.Node
+        },
         playerHp: {
             default: null,
             type: cc.Node
@@ -48,6 +52,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        arrow: {
+            default: null,
+            type: cc.Node
+        },
 
         enemyPool: null,
         scorePool: null,
@@ -66,11 +74,14 @@ cc.Class({
         this.floorPositions = [-380,-690,-1030];
         this.xBoundMin = -290;
         this.xBoundMax = 290;
+        this.playerSize = 3;
 
         this.playerComponent = this.player.getComponent('Player');
         this.playerComponent.init(this);
         this.mageComponent = this.magePlayer.getComponent('MagePlayer');
         this.mageComponent.init(this);
+        this.archerComponent = this.archerPlayer.getComponent('ArcherPlayer');
+        this.archerComponent.init(this);
         
         
         // this.enemyComponent = this.enemy.getComponent('Enemy')
@@ -146,6 +157,13 @@ cc.Class({
         }
     },
 
+    onPlayerKilled: function(player){
+        if(this.playerSize > 0){
+            this.playerSize--;
+            this.playerHp.getComponent('HpBar').init(100);
+        }
+    },
+
     showString: function(str,position){
         //cc.log('showString --------- '+str);
         var fx = this.spawnScoreFX();
@@ -157,12 +175,14 @@ cc.Class({
 
     playSkill: function(skillType, skillIntensity){
         cc.log('skillType: '+skillType+', skillIntensity: '+skillIntensity);
-        if(skillType == 1){
-            this.playerComponent.playSkill();
-        } else if(skillType == 2){
-            this.mageComponent.playSkill();
-        }
+        // if(skillType == 1){
+        //     this.playerComponent.playSkill();
+        // } else if(skillType == 2){
+        //     this.mageComponent.playSkill();
+        // }
         // this.mageComponent.playSkill();
+
+        //this.arrow.getComponent('Arrow').shoot(1,200,this.arrow.y,400,3,60);
     },
 
     spawnScoreFX: function () {

@@ -112,12 +112,14 @@ cc.Class({
     attackEnemy: function(){
         if(this.isAlive()){
             if(this.target != null && this.target.isAlive()){
+                cc.log('target is alive');
                 this.playAnim('attack');
                 this.scheduleOnce(function() {
                     this.target.beAttacked(this.attack);
                     this.attackEnemy();
                 }, 1);
             } else {
+                cc.log('target is dead');
                 this.target = null;
             }
         }
@@ -128,18 +130,15 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        //console.log('Enemy on collision enter');
-        var collisionComponent = null;
-        if(other.getComponent('Player') != null){
-            collisionComponent = other.getComponent('Player');
-        } 
-        if(other.getComponent('MagePlayer') != null){
-            collisionComponent = other.getComponent('MagePlayer'); 
-        } 
-        if(other.getComponent('FireBall') != null){
-            
-        } 
         if(this.target == null){
+            var collisionComponent = null;
+            if(other.getComponent('Player') != null){
+                collisionComponent = other.getComponent('Player');
+            } else if(other.getComponent('Fireball') != null){
+                collisionComponent = other.getComponent('Fireball').master; 
+            } else if(other.getComponent('Arrow') != null){
+                collisionComponent = other.getComponent('Arrow').master; 
+            }
             this.target = collisionComponent;
             this.attackEnemy();
         }

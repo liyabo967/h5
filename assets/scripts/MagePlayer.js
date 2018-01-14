@@ -36,6 +36,7 @@ cc.Class({
     onLoad: function () {
         this.attackRange = 150;
         this.xSpeed = 130;
+        this.hp = 100;
         this.isPlaying = true;
         this.moveEnable = true;
         this.playAnim('walk');
@@ -43,7 +44,7 @@ cc.Class({
         this.fireballPool = new cc.NodePool();
         this.firemeteorPool = new cc.NodePool();
 
-        let initCount = 1;
+        let initCount = 2;
         for (let i = 0; i < initCount; ++i) {
             let fireball = cc.instantiate(this.fireballPrefab);
             this.fireballPool.put(fireball);
@@ -70,6 +71,7 @@ cc.Class({
         if(this.hp <= 0){
             this.hp = 0;
             this.node.active = false;
+            this.game.onPlayerKilled(this);
         }
         this.game.showString("-"+hurt,new cc.p(-70,550));
         this.hpComponent.minus(hurt);
@@ -80,7 +82,8 @@ cc.Class({
         if(this.target != null){
             var firemeteor = this.spawnFiremeteor();
             if(firemeteor != null){
-                firemeteor.setPosition(this.target.node.x,this.target.node.y + 120);
+                cc.log('magePlayer play skill fire meteor');
+                firemeteor.setPosition(this.target.node.x,this.target.node.y + 100);
                 firemeteor.getComponent('Firemeteor').init(this,this.target);
                 this.game.node.addChild(firemeteor);
                 this.game.camera.getComponent(cc.Camera).addTarget(firemeteor);
@@ -128,16 +131,15 @@ cc.Class({
     attackEnemy: function(){
         if(this.isAlive()){
             if(this.target != null && this.target.isAlive()){
+                var fireball = this.spawnFireBall();
+                if(fireball != null){
+                    this.game.node.addChild(fireball);
+                    this.game.camera.getComponent(cc.Camera).addTarget(fireball);
+                    fireball.setPosition(this.node.x, this.node.y + 50);
+                    fireball.getComponent('Fireball').init(this);
+                    fireball.getComponent('Fireball').attack();
+                }
                 this.scheduleOnce(function() {
-                    var fireball = this.spawnFireBall();
-                    if(fireball != null){
-                        this.game.node.addChild(fireball);
-                        this.game.camera.getComponent(cc.Camera).addTarget(fireball);
-                        fireball.setPosition(this.node.x, this.node.y + 50);
-                        fireball.getComponent('Fireball').init(this);
-                        fireball.getComponent('Fireball').attack();
-                    }
-                
                     this.attackEnemy();
                 }, 1.5);
             } else {
@@ -153,13 +155,12 @@ cc.Class({
 
     spawnFireBall: function(){
         let fireball = null;
-        // if (this.fireballPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-        //     fireball = this.fireballPool.get();
-        // } 
-        // else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-        //     fireball = cc.instantiate(this.fireballPrefab);
-        // }
-        fireball = cc.instantiate(this.fireballPrefab);
+        if (this.fireballPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            fireball = this.fireballPool.get();
+        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            fireball = cc.instantiate(this.fireballPrefab);
+        }
+        //fireball = cc.instantiate(this.fireballPrefab);
         return fireball;
     },
     despawnFireBall: function(fireball){
@@ -171,9 +172,9 @@ cc.Class({
         if (this.firemeteorPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             firemeteor = this.firemeteorPool.get();
         } 
-        // else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-        //     fireball = cc.instantiate(this.fireballPrefab);
-        // }
+        else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            firemeteor = cc.instantiate(this.firemeteorPrefab);
+        }
         return firemeteor;
     },
     despawnFiremeteor: function(firemeteor){

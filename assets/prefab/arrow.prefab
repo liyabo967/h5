@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "enemy",
+    "_name": "arrow",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -42,76 +42,64 @@
     "_cascadeOpacityEnabled": true,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 0.5,
+      "y": 0.5
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 168,
+      "height": 31
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": -0.5,
-    "_scaleY": 0.5,
+    "_scaleX": 1,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 221.6,
-      "y": -163.5
+      "x": -261,
+      "y": -9
     },
     "_skewX": 0,
     "_skewY": 0,
     "_localZOrder": 0,
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
-    "groupIndex": 0
+    "groupIndex": 1
   },
   {
-    "__type__": "dragonBones.ArmatureDisplay",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_armatureName": "armatureName",
-    "_animationName": "idle",
-    "playTimes": 0,
-    "_N$dragonAsset": {
-      "__uuid__": "53a85234-e265-4237-af66-a71b9df632eb"
+    "_spriteFrame": {
+      "__uuid__": "f0834445-e209-449b-bfbe-9b9f79d6941e"
     },
-    "_N$dragonAtlasAsset": {
-      "__uuid__": "c24e35b2-f4f1-40ac-9af0-37b80dc53679"
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
     },
-    "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 4,
-    "_N$timeScale": 1,
-    "_N$debugBones": false
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
   },
   {
-    "__type__": "06d5fCDHUhIkY2o86Gy0bR8",
+    "__type__": "4b6e3kZEz1GU4b1pnpxdAq7",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
-    "maxHp": 100,
-    "hp": 100,
-    "hpComponent": null,
-    "attack": 10,
-    "attackRange": 150,
-    "xSpeed": 200,
-    "moveEnable": false,
-    "moveAtX": true,
-    "isPlaying": false,
-    "animationName": "idle",
-    "target": null,
-    "attackCalculate": 30,
-    "hurtBuff": 0,
-    "floor": 0,
-    "normalAttack": 6,
-    "heavyAttack": 12
+    "_enabled": true
   },
   {
     "__type__": "cc.BoxCollider",
@@ -124,13 +112,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 8.3,
-      "y": 109.3
+      "x": -26,
+      "y": 1
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 232.2,
-      "height": 222.7
+      "width": 115,
+      "height": 30
     }
   },
   {
@@ -139,9 +127,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e699bbce-6646-4b1a-b61e-29923675161c"
+      "__uuid__": "cd5ece96-5af8-4cb1-8936-b5f61a94ed34"
     },
-    "fileId": "bcKxwWE/tAiIB7K9Mm8wtv",
+    "fileId": "97qLcg+89Fz4c+IicJNQRq",
     "sync": false
   }
 ]
