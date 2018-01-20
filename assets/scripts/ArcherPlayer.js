@@ -132,7 +132,7 @@ cc.Class({
                     skill.setPosition(this.node.x, this.node.y + 50);
                     this.game.camera.getComponent(cc.Camera).addTarget(skill);
                     skill.getComponent('Arrow').init(this);
-                    skill.getComponent('Arrow').shoot(1,450,50,200,1.5,50);
+                    skill.getComponent('Arrow').shoot(1,Math.abs(this.node.x - this.target.node.x),50,180,1,45);
                 }
                 this.scheduleOnce(function() {
                     this.attackEnemy();

@@ -21,9 +21,8 @@ cc.Class({
         attackCalculate: 30,
         hurtBuff: 0,
         floor: 0,
-        normalAttack: 6,
-        heavyAttack: 12,
-
+        normalAttack: 15,
+        heavyAttack: 30,
     },
 
     // use this for initialization
@@ -33,6 +32,8 @@ cc.Class({
         this.attackRange = 150;
         this.attackCalculate = 30;
         this.xSpeed = 100;
+        this.normalAttack = 15;
+        this.heavyAttack = 30;
         this.playAnim('idle');
     },
 
@@ -67,18 +68,18 @@ cc.Class({
         if(this.isPlaying && this.animationName == animationName){
             return;
         }
-        if(animationName == 'attack'){
-            // if(this.animationName != 'attack' && this.attackCalculate <= 0){
+        // if(animationName == 'attack'){
+        //     // if(this.animationName != 'attack' && this.attackCalculate <= 0){
                 
-            // }
-            this.attackCalculate = 30;
-            this.attack = this.normalAttack;
-            if(Math.random() < 0.25){
-                animationName = 'attack_big';
-                this.attackCalculate = 40;
-                this.attack = this.heavyAttack;
-            }
-        }
+        //     // }
+        //     this.attackCalculate = 30;
+        //     this.attack = this.normalAttack;
+        //     if(Math.random() < 0.25){
+        //         animationName = 'attack_big';
+        //         this.attackCalculate = 40;
+        //         this.attack = this.heavyAttack;
+        //     }
+        // }
         //cc.log('playAnim------------------ '+animationName);
         this.isPlaying = true;
         var dragonDisplay = this.getComponent(dragonBones.ArmatureDisplay);
@@ -112,12 +113,16 @@ cc.Class({
     attackEnemy: function(){
         if(this.isAlive()){
             if(this.target != null && this.target.isAlive()){
-                cc.log('target is alive');
-                this.playAnim('attack');
+                if(Math.random() < 0.25){
+                    this.attack = this.heavyAttack;
+                    this.playAnim('attack_big');
+                } else {
+                    this.attack = this.normalAttack;
+                }
+                this.target.beAttacked(this.attack);
                 this.scheduleOnce(function() {
-                    this.target.beAttacked(this.attack);
                     this.attackEnemy();
-                }, 1);
+                }, 1.5);
             } else {
                 cc.log('target is dead');
                 this.target = null;
@@ -140,6 +145,7 @@ cc.Class({
                 collisionComponent = other.getComponent('Arrow').master; 
             }
             this.target = collisionComponent;
+            this.playAnim('attack');
             this.attackEnemy();
         }
     },

@@ -11,7 +11,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.attackPower = 8;
+        this.attackPower = 6;
     },
 
     // direction 为1则向右 为0向左

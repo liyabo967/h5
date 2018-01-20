@@ -1,0 +1,90 @@
+[
+	{
+        "id": 0,
+        "resUrl": "bgElements/topWall",
+        "width": 750,
+        "height": 779,
+        "pos_x": 0,
+        "pos_y": 0
+    },
+    {
+        "id": 1,
+        "resUrl": "bgElements/ground",
+        "width": 750,
+        "height": 39,
+        "pos_x": 0,
+        "pos_y": 779
+    },
+    {
+        "id": 2,
+        "resUrl": "bgElements/wall1",
+        "width": 750,
+        "height": 290,
+        "pos_x": 0,
+        "pos_y": 818
+    },
+    {
+        "id": 3,
+        "resUrl": "bgElements/ladder",
+        "width": 113,
+        "height": 349,
+        "pos_x": 318,
+        "pos_y": 818
+    },
+    {
+        "id": 4,
+        "resUrl": "bgElements/ground",
+        "width": 750,
+        "height": 39,
+        "pos_x": 0,
+        "pos_y": 1108
+    },
+    {
+        "id": 5,
+        "resUrl": "bgElements/wall2",
+        "width": 750,
+        "height": 267,
+        "pos_x": 0,
+        "pos_y": 1147
+    },
+    {
+        "id": 6,
+        "resUrl": "bgElements/ladder",
+        "width": 113,
+        "height": 349,
+        "pos_x": -318,
+        "pos_y": 1147
+    },
+    {
+        "id": 7,
+        "resUrl": "bgElements/ground",
+        "width": 750,
+        "height": 39,
+        "pos_x": 0,
+        "pos_y": 1414
+    },
+    {
+        "id": 8,
+        "resUrl": "bgElements/wall3",
+        "width": 750,
+        "height": 295,
+        "pos_x": 0,
+        "pos_y": 1453
+    },
+    {
+        "id": 9,
+        "resUrl": "bgElements/ladder",
+        "width": 113,
+        "height": 349,
+        "pos_x": 318,
+        "pos_y": 1453
+    },
+    {
+        "id": 10,
+        "resUrl": "bgElements/ground",
+        "width": 750,
+        "height": 39,
+        "pos_x": 0,
+        "pos_y": 1748
+    }
+]

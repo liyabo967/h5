@@ -64,9 +64,9 @@ cc.Class({
             return;
         }
         if(animationName == 'attack'){
-            this.attack = 15;
+            this.attack = 5;
         } else if(animationName == 'fish'){
-            this.attack = 50;
+            this.attack = 25;
         }
         //cc.log('playAnim------------------ '+animationName);
         this.isPlaying = true;
@@ -94,7 +94,7 @@ cc.Class({
 
     attackEnemy: function(){
         if(this.target != null && this.target.isAlive()){
-            // this.target.beAttacked(this.attack);
+            this.target.beAttacked(this.attack);
             this.scheduleOnce(function() {
                 this.attackEnemy();
             }, 1);

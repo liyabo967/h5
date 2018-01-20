@@ -79,7 +79,7 @@ cc.Class({
     },
 
     playSkill: function(){
-        if(this.target != null){
+        if(this.target != null && this.isAlive()){
             var firemeteor = this.spawnFiremeteor();
             if(firemeteor != null){
                 cc.log('magePlayer play skill fire meteor');
@@ -87,7 +87,7 @@ cc.Class({
                 firemeteor.getComponent('Firemeteor').init(this,this.target);
                 this.game.node.addChild(firemeteor);
                 this.game.camera.getComponent(cc.Camera).addTarget(firemeteor);
-                // firemeteor.getComponent('Firemeteor').attack();
+                firemeteor.getComponent('Firemeteor').attack();
             }
         }
     },
@@ -143,6 +143,7 @@ cc.Class({
                     this.attackEnemy();
                 }, 1.5);
             } else {
+                cc.log('MagePlayer ---------------------- enemy null');
                 this.target = null;
             }
         }
@@ -218,7 +219,7 @@ cc.Class({
         console.log('Player on collision enter');
         this.moveEnable = false;
         if(this.target == null){
-            console.log("-----------------this.playAnim('attack')");
+            console.log("MagePlayer ============================ get target: "+(other.getComponent('Enemy') != null));
             this.target = other.getComponent('Enemy');
             this.playAnim('attack');
             this.attackEnemy();

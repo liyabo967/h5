@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "5473647e-4693-4799-b0ec-3edf3458ec28",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "firemeteor_tex": {
+      "ver": "1.0.3",
+      "uuid": "8f0fbb52-0c69-4843-923d-557946b32b05",
+      "rawTextureUuid": "5473647e-4693-4799-b0ec-3edf3458ec28",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -31,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 1984,
+      "height": 1022,
+      "rawWidth": 2048,
+      "rawHeight": 1024,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

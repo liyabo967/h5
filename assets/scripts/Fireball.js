@@ -33,7 +33,7 @@ cc.Class({
     onCollisionEnter: function (other, self) {
         if(other.getComponent('Enemy') != null){
             this.target = other.getComponent('Enemy');
-            // this.target.beAttacked(this.attackPower);
+            this.target.beAttacked(this.attackPower);
             if(!this.target.isAlive()){
                 this.master.enemyKilled();
             }

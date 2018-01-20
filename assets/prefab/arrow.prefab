@@ -52,8 +52,8 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
+    "_scaleX": 0.8,
+    "_scaleY": 0.8,
     "_position": {
       "__type__": "cc.Vec2",
       "x": -261,
@@ -127,7 +127,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "cd5ece96-5af8-4cb1-8936-b5f61a94ed34"
+      "__id__": 0
     },
     "fileId": "97qLcg+89Fz4c+IicJNQRq",
     "sync": false

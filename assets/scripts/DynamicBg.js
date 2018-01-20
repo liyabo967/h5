@@ -4,7 +4,8 @@ var BgElementResList = cc.Class({
         id: 0,
         resUrl: cc.String,
         width: 0,
-        height: 0
+        height: 0,
+        position: cc.Vec2
     }
 });
 
@@ -12,32 +13,37 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        resList:{
-            default:[],
-            type: BgElementResList
-        }
+        
     },
 
     // use this for initialization
     onLoad: function () {
-        let currentBgHeight = 0; 
-        for(let i = 0; i < this.resList.length; i++) {
-            let nodeElement = new cc.Node();
-            nodeElement.setContentSize(this.resList[i].width, this.resList[i].height);
-            let spriteElement = nodeElement.addComponent(cc.Sprite);
 
-            this._addSpritePic(spriteElement, this.resList[i].resUrl);
+        let that = this;
+        
+        var url = cc.url.raw('resources/bgData/bgConf.json');
+        cc.loader.load( url, function(err, res)
+        {
+            // 如果有異常會在 err 變數顯示, 否則在res就會是讀進來的json object
+            let resJsonList = res;
+            for(let i = 0; i < resJsonList.length; i++) {
+                let nodeElement = new cc.Node();
+                nodeElement.setContentSize(resJsonList[i].width, resJsonList[i].height);
+                let spriteElement = nodeElement.addComponent(cc.Sprite);
 
-            nodeElement.setAnchorPoint(0.5, 1);
-            nodeElement.x = 0;
-            nodeElement.y = - currentBgHeight;
+                that._addSpritePic(spriteElement, resJsonList[i].resUrl);
 
-            currentBgHeight += nodeElement.height;
+                nodeElement.setAnchorPoint(0.5, 1);
+                nodeElement.x = resJsonList[i].pos_x;
+                nodeElement.y = - resJsonList[i].pos_y;
 
-            cc.log(currentBgHeight + " " + nodeElement.width + " " + nodeElement.height);
-            this.node.addChild(nodeElement);
-        }
+                that.node.addChild(nodeElement);
+            }
+        });
+        
     },
+
+
 
     _addSpritePic: function(container, addres){
         cc.loader.loadRes(addres, cc.SpriteFrame, function (err, spFrame) {

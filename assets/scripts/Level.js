@@ -1,4 +1,4 @@
-var enemyPositions = [new cc.p(-180,-380),new cc.p(200,-690),new cc.p(-220,-1030)];
+var enemyPositions = [new cc.p(-180,-430),new cc.p(200,-740),new cc.p(-220,-1070)];
 var enemies = new Array();
 var enemyIndex = 0;
 cc.Class({
@@ -71,7 +71,7 @@ cc.Class({
         // manager.enabledDebugDraw = true;
         // manager.enabledDrawBoundingBox = true;
 
-        this.floorPositions = [-380,-690,-1030];
+        this.floorPositions = [-420,-740,-1070];
         this.xBoundMin = -290;
         this.xBoundMax = 290;
         this.playerSize = 3;
@@ -175,14 +175,12 @@ cc.Class({
 
     playSkill: function(skillType, skillIntensity){
         cc.log('skillType: '+skillType+', skillIntensity: '+skillIntensity);
-        // if(skillType == 1){
-        //     this.playerComponent.playSkill();
-        // } else if(skillType == 2){
-        //     this.mageComponent.playSkill();
-        // }
-        // this.mageComponent.playSkill();
-
-        //this.arrow.getComponent('Arrow').shoot(1,200,this.arrow.y,400,3,60);
+        if(skillType == 1){
+            this.playerComponent.playSkill();
+        } else if(skillType == 2){
+            this.mageComponent.playSkill();
+        }
+        //this.mageComponent.playSkill();
     },
 
     spawnScoreFX: function () {

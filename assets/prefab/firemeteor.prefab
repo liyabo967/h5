@@ -71,17 +71,17 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_armatureName": "Sprite",
-    "_animationName": "",
-    "playTimes": 1,
+    "_armatureName": "Armature",
+    "_animationName": "fireball",
+    "playTimes": -1,
     "_N$dragonAsset": {
-      "__uuid__": "d5763796-884d-4313-9b5d-345974fb7ae5"
+      "__uuid__": "36d51c34-9bb1-4cbe-ae02-6eebf8eba0fc"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "34cd6608-616a-4a98-bab4-2cd82d01f84d"
+      "__uuid__": "4c0c2b2d-4671-4cff-9230-82125922dee9"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 0,
+    "_N$_animationIndex": 1,
     "_N$timeScale": 1,
     "_N$debugBones": false
   },
@@ -102,9 +102,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "2551f4de-589a-4b8f-826b-f35ef30f6c61"
+      "__id__": 0
     },
-    "fileId": "0eoljQMEBIYLNXoX2+RoLW",
+    "fileId": "61YFtzSMtJTaZssrn/WRt/",
     "sync": false
   }
 ]
