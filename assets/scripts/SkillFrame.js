@@ -52,16 +52,21 @@ cc.Class({
 
     // use this for initialization
     onLoad: function() {
+        // 防止重复操作
+        this.processing = false;
+
         this.timer = 0;
         // 技能块池
         this.skillBlockPool = new cc.NodePool();
         for (let i = 0; i < this.maxSkillNum; i++) {
             let skillBlock = cc.instantiate(this.skillBlockPrefab);
             skillBlock.on(cc.Node.EventType.TOUCH_START, function (event) {
-               var checkResult = this.checkErase(0);
-               this.eraseSkillBlock(checkResult[0], checkResult[1]);
-
-               this.game.playSkill(checkResult[2],checkResult[3]);
+                if(this.processing == false) {
+                    this.processing = true;
+                    var checkResult = this.checkErase(0);
+                    this.eraseSkillBlock(checkResult[0], checkResult[1]);
+                    this.game.playSkill(checkResult[2],checkResult[3]);
+                }
             }, this);
             this.skillBlockPool.put(skillBlock);
         }
@@ -79,6 +84,11 @@ cc.Class({
 
     addSkillBlock: function() {
         var arrayLength = this.skillBlockArray.length ;
+
+        if(this.processing == true && arrayLength != 0) {
+            cc.log("arrayLength = " + arrayLength);
+            return;
+        }
 
         if(arrayLength < this.maxSkillNum) {
             var item = null;
@@ -203,12 +213,18 @@ cc.Class({
             } else {
                 var finished = cc.callFunc(function(target, gap) {
                     this.skillBlockArray.splice(gap[0], gap[1] - gap[0] + 1);
+                    this.processing = false;
                 }, this, [left, right]);
                 this.skillBlockArray[i].runAction(cc.sequence(cc.delayTime(0.3), 
                     cc.moveBy(this.fullMoveTime * (right - left + 1) / this.maxSkillNum, 
                     (this.skillBlockWidth + this.skillBlockMargin) * (right - left + 1),
                     0), finished));
             }
+        }
+
+        if(right + 1 >= arrayLength) {
+            this.skillBlockArray.splice(left, right - left + 1);
+            this.processing = false;
         }
     }
 });
